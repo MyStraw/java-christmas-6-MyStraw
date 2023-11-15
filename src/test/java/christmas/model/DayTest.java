@@ -25,33 +25,35 @@ public class DayTest {
         assertEquals(expected, dayCalculation.isWeekDay(date));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "2023-12-2, true",  // 토요일은 주말
+            "2023-12-3, false"  // 일요일은 주말이 아님
+    })
     @DisplayName("토요일은 주말이고 일요일은 주말이 아니다")
-    void testIsWeekEnd() {
-        // 토요일은 주말
-        assertTrue(dayCalculation.isWeekEnd(LocalDate.of(2023, 12, 2)));
-        // 일요일은 주말이 아님
-        assertFalse(dayCalculation.isWeekEnd(LocalDate.of(2023, 12, 3)));
+    void testIsWeekEnd(LocalDate date, boolean expected) {
+        assertEquals(expected, dayCalculation.isWeekEnd(date));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "2023-12-25, true",  // 크리스마스는 특별한 날
+            "2023-12-24, true",  // 일요일도 특별한 날
+            "2023-12-6, false"   // 평범한 날은 특별한 날이 아님
+    })
     @DisplayName("일요일과 크리스마스는 특별한 날이다")
-    void testIsSpecialDay() {
-        // 크리스마스는 특별한 날
-        assertTrue(dayCalculation.isSpecialDay(LocalDate.of(2023, 12, 25)));
-        // 일요일도 특별한 날
-        assertTrue(dayCalculation.isSpecialDay(LocalDate.of(2023, 12, 24)));
-        // 평범한 날은 특별한 날이 아님
-        assertFalse(dayCalculation.isSpecialDay(LocalDate.of(2023, 12, 6)));
+    void testIsSpecialDay(LocalDate date, boolean expected) {
+        assertEquals(expected, dayCalculation.isSpecialDay(date));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "2023-12-12, 2100", // D-day 할인 계산
+            "2023-12-26, 0"     // D-day 범위를 벗어난 날짜
+    })
     @DisplayName("D-day 할인계산")
-    void testCalculateDdayDiscount() {
-        // D-day 할인 계산
-        assertEquals(2100, dayCalculation.calculateDdayDiscount(LocalDate.of(2023, 12, 12)));
-        // D-day 범위를 벗어난 날짜
-        assertEquals(0, dayCalculation.calculateDdayDiscount(LocalDate.of(2023, 12, 26)));
+    void testCalculateDdayDiscount(LocalDate date, int expectedDiscount) {
+        assertEquals(expectedDiscount, dayCalculation.calculateDdayDiscount(date));
     }
 
     @Test
@@ -68,12 +70,13 @@ public class DayTest {
         assertEquals(4046, dayCalculation.calculateWeekendDiscount(2));
     }
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "2023-12-25, true, 1000",  // 특별한 날의 할인
+            "2023-12-26, false, 0"     // 특별하지 않은 날은 할인 없음
+    })
     @DisplayName("특별한 날은 1000원 할인")
-    void testCalculateSpecialDiscount() {
-        // 특별한 날의 할인
-        assertEquals(1000, dayCalculation.calculateSpecialDiscount(LocalDate.of(2023, 12, 25), true));
-        // 특별하지 않은 날은 할인 없음
-        assertEquals(0, dayCalculation.calculateSpecialDiscount(LocalDate.of(2023, 12, 26), false));
+    void testCalculateSpecialDiscount(LocalDate date, boolean hasStar, int expectedDiscount) {
+        assertEquals(expectedDiscount, dayCalculation.calculateSpecialDiscount(date, hasStar));
     }
 }
