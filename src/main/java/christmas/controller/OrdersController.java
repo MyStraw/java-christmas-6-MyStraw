@@ -14,10 +14,12 @@ public class OrdersController {
         this.ordersService = new OrdersService();
         this.dayService = new DayService();
     }
-
     // 주문 처리
     public Orders processOrder(String[] orderedItems, LocalDate visitDate) {
         return ordersService.processOrder(orderedItems, visitDate, dayService);
     }
 
+    public String determineGiftedItem(Orders orders) {
+        return ordersService.determineGiftedItem(orders);
+    }
 }

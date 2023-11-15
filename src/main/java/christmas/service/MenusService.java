@@ -1,8 +1,6 @@
 package christmas.service;
 
-import christmas.constant.Constants;
 import christmas.model.Menus;
-import christmas.model.Orders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +14,6 @@ public class MenusService {
                 .findFirst()
                 .map(Menus::getPrice)
                 .orElse(0);
-    }
-
-    public static String determineGiftedItem(Orders orders) {
-        return orders.getTotalCost() >= Constants.CHAMPAGNE_GIFT_MIN_AMOUNT ? "샴페인 1개" : "";
     }
 
     // 모든 메뉴 목록 조회
