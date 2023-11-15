@@ -4,6 +4,8 @@ public class Constants {
     public static final int WEEKDAY_DISCOUNT_PER_DESSERT = 2_023;
     public static final int WEEKEND_DISCOUNT_PER_MAIN_DISH = 2_023;
     public static final int DISCOUNT_PER_DAY = 100;
+    public static final int YEAR = 2023;
+    public static final int MONTH = 12;
     public static final int CHRISTMAS = 25;
     public static final int SPECIAL_INITIAL_DISCOUNT = 1_000;
     public static final int CHAMPAGNE_PRICE = 25_000;
