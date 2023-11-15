@@ -26,7 +26,7 @@ public class Day {
         int initialDiscount = 1000;
         int dayOfMonth = date.getDayOfMonth();
 
-        if (dayOfMonth >= startDayOfMonth && dayOfMonth <= 25) {
+        if (dayOfMonth <= 25) {
             return initialDiscount + (dayOfMonth - startDayOfMonth) * discountPerDay;
         }
         return 0;
