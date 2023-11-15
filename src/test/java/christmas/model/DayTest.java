@@ -4,6 +4,8 @@ package christmas.model;
 import christmas.model.Day;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 
@@ -13,13 +15,14 @@ public class DayTest {
 
     private Day dayCalculation = new Day();
 
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "2023-12-4, true",  // 월요일은 평일
+            "2023-12-2, false"  // 토요일은 평일이 아님
+    })
     @DisplayName("월요일은 평일이고 토요일은 평일이 아니다")
-    void testIsWeekDay() {
-        // 월요일은 평일
-        assertTrue(dayCalculation.isWeekDay(LocalDate.of(2023, 12, 4)));
-        // 토요일은 평일이 아님
-        assertFalse(dayCalculation.isWeekDay(LocalDate.of(2023, 12, 2)));
+    void testIsWeekDay(LocalDate date, boolean expected) {
+        assertEquals(expected, dayCalculation.isWeekDay(date));
     }
 
     @Test
