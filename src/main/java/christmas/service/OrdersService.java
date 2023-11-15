@@ -1,5 +1,6 @@
 package christmas.service;
 
+import christmas.constant.Constants;
 import christmas.model.Menus;
 import christmas.model.Orders;
 
@@ -50,5 +51,11 @@ public class OrdersService {
 
         return new Orders(totalCost, totalItemsCount, onlyDrink, weekdayDiscount, weekendDiscount,
                 ddayDiscount, specialDiscount);
+    }
+    public static String determineGiftedItem(Orders orders) {
+        if (orders.getTotalCost() >= Constants.CHAMPAGNE_GIFT_MIN_AMOUNT) {
+            return "샴페인 1개";
+        }
+        return "";
     }
 }

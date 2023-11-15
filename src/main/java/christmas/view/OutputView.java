@@ -2,13 +2,13 @@ package christmas.view;
 
 import christmas.constant.Constants;
 import christmas.controller.BadgeController;
+import christmas.controller.DiscountController;
 import christmas.model.Orders;
-import christmas.service.DiscountService;
 import christmas.service.MenusService;
 import christmas.util.StringUtil;
 
 public class OutputView {
-    public static void printOrderSummary(int day, String[] orderedItems, Orders orders, String giftedItem, int totalDiscount, DiscountService discountService) {
+    public static void printOrderSummary(int day, String[] orderedItems, Orders orders, String giftedItem, int totalDiscount, DiscountController discountService) {
         System.out.println("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n");
         System.out.println("<주문 메뉴>");
         for (String item : orderedItems) {

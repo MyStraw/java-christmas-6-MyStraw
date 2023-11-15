@@ -3,7 +3,6 @@ package christmas.service;
 import christmas.constant.Constants;
 
 public class BadgeService {
-
     public static String determineEventBadge(int totalDiscount) {
         if (totalDiscount >= Constants.SANTA) {
             return "산타";

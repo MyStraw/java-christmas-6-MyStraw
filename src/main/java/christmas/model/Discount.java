@@ -3,7 +3,6 @@ package christmas.model;
 import java.text.DecimalFormat;
 
 public enum Discount {
-
     D_DAY_DISCOUNT {
         @Override
         public int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
@@ -63,7 +62,6 @@ public enum Discount {
                 return giftedItemValue;
             }
         }
-
     };
 
     public abstract int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,

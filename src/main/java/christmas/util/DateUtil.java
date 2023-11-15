@@ -18,6 +18,6 @@ public class DateUtil {
 
     public static boolean isSpecialDay(LocalDate date) {
         return date.getDayOfWeek() == DayOfWeek.SUNDAY
-                || date.equals(LocalDate.of(date.getYear(), 12, Constants.CHRISTMAS));
+                || date.equals(LocalDate.of(date.getYear(), Constants.MONTH, Constants.CHRISTMAS));
     }
 }
