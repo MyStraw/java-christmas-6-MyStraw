@@ -1,5 +1,6 @@
 package christmas.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class OrderTest {
 
     @Test
+    @DisplayName("주문이 잘 입력되는지 확인")
     void testOrderCreation() {
         int totalCost = 10000;
         int totalItemsCount = 5;
