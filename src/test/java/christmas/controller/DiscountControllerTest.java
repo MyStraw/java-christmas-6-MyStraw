@@ -29,4 +29,16 @@ public class DiscountControllerTest {
         assertEquals(expectedDiscount, actualDiscount);
     }
 
+    @Test
+    @DisplayName("예상되는 할인금액 테스트2")
+    void testCalculateTotalDiscount2() {
+        discountController = new DiscountController();
+        // 가상의 주문 데이터 설정
+        orders = new Orders(50000, 3, false, 2023, 1000, 500, 0);
+        String giftedItem = "샴페인 1개";
+        int giftedItemValue = 25000; // 샴페인 가격 가정
+        int totalDiscount = discountController.calculateTotalDiscount(orders, giftedItem, giftedItemValue);
+        assertEquals(28523, totalDiscount); // 예상되는 할인 금액 검증
+    }
+
 }
