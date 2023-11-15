@@ -1,7 +1,6 @@
-package christmas.model;
+package christmas.service;
 
 
-import christmas.model.Day;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,9 +10,9 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DayTest {
+public class DayServiceTest {
 
-    private Day dayCalculation = new Day();
+    private DayService dayCalculation = new DayService();
 
     @ParameterizedTest
     @CsvSource({

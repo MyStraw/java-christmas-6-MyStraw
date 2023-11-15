@@ -1,5 +1,7 @@
 package christmas.model;
 
+import christmas.service.DayService;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,8 +26,7 @@ public class Order {
         this.specialDiscount = specialDiscount;
     }
 
-    public static Order processOrder(String[] orderedItems, LocalDate visitDate,
-                                     Day discountCalculator) {
+    public static Order processOrder(String[] orderedItems, LocalDate visitDate, DayService discountCalculator) {
         int totalCost = 0;
         int totalItemsCount = 0;
         boolean onlyDrink = true;
