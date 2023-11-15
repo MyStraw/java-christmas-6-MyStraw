@@ -2,6 +2,7 @@ package christmas.service;
 
 import christmas.model.Order;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class OrderServiceTest {
     }
 
     @Test
+    @DisplayName("해당 날짜와 주문입력에 대해 할인이 맞게 계산되는지 확인")
     void processOrderTest() {
         String[] orderedItems = new String[]{"해산물파스타-2", "레드와인-1"};
         LocalDate visitDate = LocalDate.of(2023, 12, 15);
