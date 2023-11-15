@@ -7,10 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MenuTest {
+class MenusTest {
 
     private void testMenuCreation(String name, int price) {
-        Menu menuItem = new Menu(name, price);
+        Menus menuItem = new Menus(name, price);
         assertEquals(name, menuItem.getName());
         assertEquals(price, menuItem.getPrice());
     }
@@ -41,7 +41,7 @@ class MenuTest {
 
 
 
-    private void testMenuList(List<Menu> menuList, int expectedSize, String expectedFirstItemName) {
+    private void testMenuList(List<Menus> menuList, int expectedSize, String expectedFirstItemName) {
         assertEquals(expectedSize, menuList.size());
         assertEquals(expectedFirstItemName, menuList.get(0).getName());
     }
@@ -49,25 +49,25 @@ class MenuTest {
     @Test
     @DisplayName("에피타이저 메뉴 개수 확인")
     void testGetAppetizers() {
-        testMenuList(Menu.getAppetizer(), 3, "양송이수프");
+        testMenuList(Menus.getAppetizer(), 3, "양송이수프");
     }
 
     @Test
     @DisplayName("메인 메뉴 개수 확인")
     void testGetMainDishes() {
-        testMenuList(Menu.getMainDishes(), 4, "티본스테이크");
+        testMenuList(Menus.getMainDishes(), 4, "티본스테이크");
     }
 
     @Test
     @DisplayName("디저트 메뉴 개수 확인")
     void testGetDesserts() {
-        testMenuList(Menu.getDesserts(), 2, "초코케이크");
+        testMenuList(Menus.getDesserts(), 2, "초코케이크");
     }
 
     @Test
     @DisplayName("음료 메뉴 개수 확인")
     void testGetDrinks() {
-        testMenuList(Menu.getDrinks(), 3, "제로콜라");
+        testMenuList(Menus.getDrinks(), 3, "제로콜라");
     }
 
 }

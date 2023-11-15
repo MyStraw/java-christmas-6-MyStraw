@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class OrderTest {
+public class OrdersTest {
 
     @Test
     @DisplayName("주문이 잘 입력되는지 확인")
@@ -19,7 +19,7 @@ public class OrderTest {
         int ddayDiscount = 200;
         int specialDiscount = 300;
 
-        Order order = new Order(totalCost, totalItemsCount, onlyDrink,
+        Orders order = new Orders(totalCost, totalItemsCount, onlyDrink,
                 weekdayDiscount, weekendDiscount, ddayDiscount, specialDiscount);
 
         assertEquals(totalCost, order.totalCost);

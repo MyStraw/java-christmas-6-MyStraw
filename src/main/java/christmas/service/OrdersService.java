@@ -1,13 +1,13 @@
 package christmas.service;
 
-import christmas.model.Menu;
-import christmas.model.Order;
+import christmas.model.Menus;
+import christmas.model.Orders;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public class OrderService {
-    public static Order processOrder(String[] orderedItems, LocalDate visitDate, DayService discountCalculator) {
+public class OrdersService {
+    public static Orders processOrder(String[] orderedItems, LocalDate visitDate, DayService discountCalculator) {
         int totalCost = 0;
         int totalItemsCount = 0;
         boolean onlyDrink = true;
@@ -28,18 +28,18 @@ public class OrderService {
             int quantity = Integer.parseInt(parts[1]);
             totalItemsCount += quantity;
 
-            for (List<Menu> menuList : List.of(Menu.getAppetizer(), Menu.getMainDishes(),
-                    Menu.getDesserts(), Menu.getDrinks())) {
-                for (Menu menuItem : menuList) {
+            for (List<Menus> menuList : List.of(Menus.getAppetizer(), Menus.getMainDishes(),
+                    Menus.getDesserts(), Menus.getDrinks())) {
+                for (Menus menuItem : menuList) {
                     if (menuItem.getName().equals(menuItemName)) {
                         totalCost += menuItem.getPrice() * quantity;
-                        if (!menuList.equals(Menu.getDrinks())) {
+                        if (!menuList.equals(Menus.getDrinks())) {
                             onlyDrink = false;
                         }
 
-                        if (menuList.equals(Menu.getDesserts()) && !isWeekend) {
+                        if (menuList.equals(Menus.getDesserts()) && !isWeekend) {
                             weekdayDiscount += discountCalculator.calculateWeekdayDiscount(quantity);
-                        } else if (menuList.equals(Menu.getMainDishes()) && isWeekend) {
+                        } else if (menuList.equals(Menus.getMainDishes()) && isWeekend) {
                             weekendDiscount += discountCalculator.calculateWeekendDiscount(quantity);
                         }
                         break;
@@ -48,7 +48,7 @@ public class OrderService {
             }
         }
 
-        return new Order(totalCost, totalItemsCount, onlyDrink, weekdayDiscount, weekendDiscount,
+        return new Orders(totalCost, totalItemsCount, onlyDrink, weekdayDiscount, weekendDiscount,
                 ddayDiscount, specialDiscount);
     }
 }

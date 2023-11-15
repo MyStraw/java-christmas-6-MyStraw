@@ -1,11 +1,9 @@
 package christmas.service;
 
-import christmas.model.Order;
+import christmas.model.Orders;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.text.DecimalFormat;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,7 +20,7 @@ public class DiscountServiceTest {
     @Test
     @DisplayName("총 할인 금액 계산 테스트")
     void testCalculateTotalDiscount() {
-        Order order = new Order(100000, 5, false, 2023, 4046, 1000, 1000);
+        Orders order = new Orders(100000, 5, false, 2023, 4046, 1000, 1000);
         String giftedItem = "샴페인 1개";
         int giftedItemValue = 25000;
 

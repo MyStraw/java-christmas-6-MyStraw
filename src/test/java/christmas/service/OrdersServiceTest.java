@@ -1,6 +1,6 @@
 package christmas.service;
 
-import christmas.model.Order;
+import christmas.model.Orders;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,11 +9,11 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OrderServiceTest {
+public class OrdersServiceTest {
 
     @BeforeEach
     void setUp() {
-        OrderService orderService = new OrderService();
+        OrdersService orderService = new OrdersService();
     }
 
     @Test
@@ -23,7 +23,7 @@ public class OrderServiceTest {
         LocalDate visitDate = LocalDate.of(2023, 12, 15);
         DayService dayService = new DayService();
         // OrderService를 이용한 주문 처리
-        Order order = OrderService.processOrder(orderedItems, visitDate, dayService);
+        Orders order = OrdersService.processOrder(orderedItems, visitDate, dayService);
         assertNotNull(order);
         assertEquals(130000, order.getTotalCost());
         assertEquals(3, order.getTotalItemsCount());

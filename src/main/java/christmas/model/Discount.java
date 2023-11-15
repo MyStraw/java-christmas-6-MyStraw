@@ -6,7 +6,7 @@ public enum Discount {
 
     D_DAY_DISCOUNT {
         @Override
-        public int applyDiscount(Order orderResult, String giftedItem, int giftedItemValue,
+        public int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
                                  DecimalFormat decimalFormat) {
             if (orderResult.ddayDiscount > 0) {
                 System.out.println("크리스마스 디데이 할인: -" + decimalFormat.format(orderResult.ddayDiscount) + "원");
@@ -17,7 +17,7 @@ public enum Discount {
     },
     WEEKDAY_DISCOUNT {
         @Override
-        public int applyDiscount(Order orderResult, String giftedItem, int giftedItemValue,
+        public int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
                                  DecimalFormat decimalFormat) {
             if (orderResult.weekdayDiscount > 0) {
                 System.out.println("평일 할인: -" + decimalFormat.format(orderResult.weekdayDiscount) + "원");
@@ -29,7 +29,7 @@ public enum Discount {
 
     WEEKEND_DISCOUNT {
         @Override
-        public int applyDiscount(Order orderResult, String giftedItem, int giftedItemValue,
+        public int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
                                  DecimalFormat decimalFormat) {
             if (orderResult.weekendDiscount > 0) {
                 System.out.println("주말 할인: -" + decimalFormat.format(orderResult.weekendDiscount) + "원");
@@ -41,7 +41,7 @@ public enum Discount {
 
     SPECIAL_DISCOUNT {
         @Override
-        public int applyDiscount(Order orderResult, String giftedItem, int giftedItemValue,
+        public int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
                                  DecimalFormat decimalFormat) {
             if (orderResult.specialDiscount > 0) {
                 System.out.println("특별 할인: -" + decimalFormat.format(orderResult.specialDiscount) + "원");
@@ -53,7 +53,7 @@ public enum Discount {
 
     GIFTED_ITEM {
         @Override
-        public int applyDiscount(Order orderResult, String giftedItem, int giftedItemValue,
+        public int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
                                  DecimalFormat decimalFormat) {
             if (giftedItem.isEmpty()) {
                 System.out.println("증정 이벤트: 없음");
@@ -66,6 +66,6 @@ public enum Discount {
 
     };
 
-    public abstract int applyDiscount(Order orderResult, String giftedItem, int giftedItemValue,
+    public abstract int applyDiscount(Orders orderResult, String giftedItem, int giftedItemValue,
                                       DecimalFormat decimalFormat);
 }

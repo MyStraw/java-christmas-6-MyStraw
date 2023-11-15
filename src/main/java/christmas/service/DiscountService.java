@@ -1,13 +1,13 @@
 package christmas.service;
 
 import christmas.model.Discount;
-import christmas.model.Order;
+import christmas.model.Orders;
 import christmas.util.StringUtil;
 
 import java.text.DecimalFormat;
 
 public class DiscountService {
-    public int calculateTotalDiscount(Order order, String giftedItem, int giftedItemValue) {
+    public int calculateTotalDiscount(Orders order, String giftedItem, int giftedItemValue) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###");
         int totalDiscount = 0;
         totalDiscount += Discount.D_DAY_DISCOUNT.applyDiscount(order, giftedItem, giftedItemValue, decimalFormat);

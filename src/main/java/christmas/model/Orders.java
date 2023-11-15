@@ -1,11 +1,6 @@
 package christmas.model;
 
-import christmas.service.DayService;
-
-import java.time.LocalDate;
-import java.util.List;
-
-public class Order {
+public class Orders {
 
     int totalCost;
     int totalItemsCount;
@@ -15,8 +10,8 @@ public class Order {
     int ddayDiscount;
     int specialDiscount;
 
-    public Order(int totalCost, int totalItemsCount, boolean onlyDrink, int weekdayDiscount, int weekendDiscount,
-                int ddayDiscount, int specialDiscount) {
+    public Orders(int totalCost, int totalItemsCount, boolean onlyDrink, int weekdayDiscount, int weekendDiscount,
+                  int ddayDiscount, int specialDiscount) {
         this.totalCost = totalCost;
         this.totalItemsCount = totalItemsCount;
         this.onlyDrink = onlyDrink;
