@@ -9,13 +9,16 @@ import java.util.regex.Pattern;
 
 public class InputViewValidation {
 
+    public static int day = 0;
     public int getValidVisitDay() {
         while (true) {
-            int day = InputView.getVisitDay();
-            if (day >= 1 && day <= 31) {
-                return day;
-            }
-            else {
+            try {
+                day = InputView.getVisitDay(); // 사용자 입력을 문자열로 받음
+                // 문자열을 정수로 변환
+                if (day >= 1 && day <= 31) {
+                    return day;
+                }
+            } catch (NumberFormatException e) {
                 System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
             }
         }
@@ -24,15 +27,13 @@ public class InputViewValidation {
     public String getValidOrder() {
         while (true) {
             String order = InputView.getOrder();
-            // 주문 유효성 검사: 정규표현식을 사용하여 형식 확인
             String orderPattern = "^(\\s*\\p{L}+-\\d+\\s*,\\s*)*\\p{L}+-\\d+\\s*$";
             Pattern pattern = Pattern.compile(orderPattern);
             Matcher matcher = pattern.matcher(order);
             if (matcher.matches()) {
                 return order;
-            } else {
-                System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
             }
+            System.out.println("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
@@ -42,10 +43,16 @@ public class InputViewValidation {
         }
         if (orderResult.isOnlyDrink()) {
             System.out.println("[ERROR] 음료만 주문할 순 없습니다.");
+            return; // 음료만 주문한 경우 추가 검증 필요 없음
         }
         if (orderResult.getTotalItemsCount() > Constants.MAX_ITEM_COUNT) {
             System.out.println("[ERROR] 메뉴는 최대 20개까지만 주문할 수 있습니다.");
+            return; // 주문 항목 수가 초과된 경우 추가 검증 필요 없음
         }
+    }
+
+    public int getDay() {
+        return day;
     }
 }
 
