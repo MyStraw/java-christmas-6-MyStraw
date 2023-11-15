@@ -1,31 +1,45 @@
 package christmas;
 
-import camp.nextstep.edu.missionutils.Console;
+import christmas.constant.Constants;
+import christmas.controller.BadgeController;
+import christmas.model.Orders;
+import christmas.service.DayService;
+import christmas.service.DiscountService;
+import christmas.service.MenusService;
+import christmas.service.OrdersService;
+import christmas.util.StringUtil;
+import christmas.view.InputView;
+import christmas.view.OutputView;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
-        System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
-        System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
-        int day = Integer.parseInt(Console.readLine());
 
-        System.out.println("주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)");
-        String order = Console.readLine();
+        int day = InputView.getVisitDay();
+        String order = InputView.getOrder();
 
+        String[] orderedItems = StringUtil.splitString(order, ",");
+        LocalDate visitDate = LocalDate.of(2023, 12, day);
 
-
-        System.out.println("12월 " + day + "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
-        System.out.println("<주문 메뉴>");
-        System.out.println(order.replace(",", "\n"));
-        System.out.println("\n<할인 전 총주문 금액>");
-
-
-        // 증정 메뉴 출력
-        System.out.println("\n<증정 메뉴>");
+        OrdersService ordersService = new OrdersService();
+        DiscountService discountService = new DiscountService();
+        BadgeController badgeController = new BadgeController();
+        Orders orderResult = ordersService.processOrder(orderedItems, visitDate, new DayService());
+        // 증정 이벤트 및 할인 계산
+        String giftedItem = determineGiftedItem(orderResult);
+        int giftedItemValue = MenusService.getChampagnePrice();
+        int totalDiscount = discountService.calculateTotalDiscount(orderResult, giftedItem, giftedItemValue);
+        // 결과 출력
+        OutputView.printOrderSummary(day, orderedItems, orderResult, giftedItem, totalDiscount, discountService);
+        // 최종 결제 금액 및 이벤트 배지 출력
+        OutputView.printFinalPaymentAndBadge(orderResult, totalDiscount, giftedItemValue, badgeController);
+    }
+    private static String determineGiftedItem(Orders orders) {
+        if (orders.getTotalCost() >= Constants.CHAMPAGNE_GIFT_MIN_AMOUNT) {
+            return "샴페인 1개";
+        }
+        return "";
     }
 }
 
