@@ -26,48 +26,31 @@ public class Order {
         this.specialDiscount = specialDiscount;
     }
 
-    public static Order processOrder(String[] orderedItems, LocalDate visitDate, DayService discountCalculator) {
-        int totalCost = 0;
-        int totalItemsCount = 0;
-        boolean onlyDrink = true;
-        int weekdayDiscount = 0;
-        int weekendDiscount = 0;
-        int ddayDiscount = discountCalculator.calculateDdayDiscount(visitDate);
-        int specialDiscount = 0;
+    public int getTotalCost() {
+        return totalCost;
+    }
 
-        if (discountCalculator.isSpecialDay(visitDate)) {
-            specialDiscount = discountCalculator.calculateSpecialDiscount(visitDate, true);
-        }
+    public int getTotalItemsCount() {
+        return totalItemsCount;
+    }
 
-        boolean isWeekend = discountCalculator.isWeekEnd(visitDate);
+    public boolean isOnlyDrink() {
+        return onlyDrink;
+    }
 
-        for (String item : orderedItems) {
-            String[] parts = item.trim().split("-");
-            String menuItemName = parts[0];
-            int quantity = Integer.parseInt(parts[1]);
-            totalItemsCount += quantity;
+    public int getWeekendDiscount(){
+        return weekendDiscount;
+    }
 
-            for (List<Menu> menuList : List.of(Menu.getAppetizer(), Menu.getMainDishes(),
-                    Menu.getDesserts(), Menu.getDrinks())) {
-                for (Menu menuItem : menuList) {
-                    if (menuItem.getName().equals(menuItemName)) {
-                        totalCost += menuItem.getPrice() * quantity;
-                        if (!menuList.equals(Menu.getDrinks())) {
-                            onlyDrink = false;
-                        }
+    public int getDdayDiscount() {
+        return ddayDiscount;
+    }
 
-                        if (menuList.equals(Menu.getDesserts()) && !isWeekend) {
-                            weekdayDiscount += discountCalculator.calculateWeekdayDiscount(quantity);
-                        } else if (menuList.equals(Menu.getMainDishes()) && isWeekend) {
-                            weekendDiscount += discountCalculator.calculateWeekendDiscount(quantity);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
+    public int getSpecialDiscount() {
+        return specialDiscount;
+    }
 
-        return new Order(totalCost, totalItemsCount, onlyDrink, weekdayDiscount, weekendDiscount,
-                ddayDiscount, specialDiscount);
+    public int getWeekdayDiscount() {
+        return weekdayDiscount;
     }
 }
