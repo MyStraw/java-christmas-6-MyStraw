@@ -18,14 +18,11 @@ public class Application {
         InputViewValidation validator = new InputViewValidation();
         int day = validator.getValidVisitDay();
         String order = validator.getValidOrder();
-
-        String[] orderedItems = StringUtil.splitString(order, ",");
-        LocalDate visitDate = LocalDate.of(Constants.YEAR, Constants.MONTH, day);
-
         OrdersController ordersController = new OrdersController();
         DiscountController discountController = new DiscountController();
-
         BadgeController badgeController = new BadgeController();
+        String[] orderedItems = StringUtil.splitString(order, ",");
+        LocalDate visitDate = LocalDate.of(Constants.YEAR, Constants.MONTH, day);
         Orders orderResult = ordersController.processOrder(orderedItems, visitDate);
         validator.validateOrder(orderResult);
         // 증정 이벤트 및 할인 계산
